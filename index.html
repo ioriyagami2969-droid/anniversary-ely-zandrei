@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>You're Invited, Miss ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #2c2f33;
+      color: #fefefe;
+      overflow-x: hidden;
+      text-align: center;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    /* Candlelight flicker effect */
+    .candlelight {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle at center, rgba(255, 147, 41, 0.8), transparent 70%);
+      filter: blur(70px);
+      animation: flicker 3s infinite alternate ease-in-out;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+    }
+
+    @keyframes flicker {
+      0% {
+        opacity: 0.8;
+        transform: translate(-50%, -50%) scale(1);
+      }
+      50% {
+        opacity: 0.6;
+        transform: translate(calc(-50% + 3px), calc(-50% + 2px)) scale(1.05);
+      }
+      100% {
+        opacity: 0.8;
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+
+    .chalkboard {
+      position: relative;
+      background: #1e1e1e;
+      border: 10px solid #ccc;
+      border-radius: 15px;
+      padding: 40px;
+      width: 90%;
+      max-width: 800px;
+      margin: 80px auto 40px;
+      box-shadow: 0 0 30px rgba(255, 192, 203, 0.3);
+      z-index: 1;
+    }
+
+    h1 {
+      font-size: 2.8em;
+      color: #ffb6c1;
+      margin-bottom: 0.4em;
+    }
+
+    p {
+      font-size: 1.2em;
+      line-height: 1.6;
+      color: #eee;
+    }
+
+    .details {
+      margin-top: 20px;
+      font-size: 1.1em;
+      color: #ffd1dc;
+    }
+
+    button {
+      margin-top: 30px;
+      background-color: #ff66a3;
+      color: white;
+      border: none;
+      padding: 12px 28px;
+      font-size: 1.1em;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #ff3385;
+    }
+
+    #secondClick, #finalMessage {
+      display: none;
+    }
+
+    #finalMessage {
+      font-size: 1.5em;
+      color: #ffb6c1;
+      margin-top: 25px;
+    }
+
+    .countdown {
+      font-size: 1.5em;
+      color: #fffacd;
+      margin-top: 20px;
+    }
+
+    .carousel {
+      margin-top: 30px;
+      max-width: 90%;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+
+    .carousel img {
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+      border-radius: 10px;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      transform: rotate(45deg);
+      animation: float 10s infinite ease-in;
+      z-index: 1;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
+    /* Map container */
+    .map-container {
+      margin: 40px auto 20px;
+      width: 90%;
+      max-width: 700px;
+      height: 350px;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(255, 192, 203, 0.4);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="candlelight"></div>
+
+ <div class="chalkboard">
+    <h1>Dear Miss Ely <3</h1>
+    <p>
+      Your class is officially dismissed tomorrow at 6 PM,  
+      because your favorite student (aka me, Zandrei!) is taking you out  
+      on a very special <strong>5th Anniversary Date</strong>. 🥰 Pahinga muna sa pagrereview, ok?
+    </p>
+    <p class="details">
+       <strong>Date:</strong> September 14, 2025<br>
+       <strong>Time:</strong> 6:00 PM – 9:00 PM<br>
+       <strong>Where:</strong> Encima Roofdeck, Makati
+    </p>
+
+    <!-- Countdown Timer -->
+    <div class="countdown" id="countdown">
+      ⏳ Counting down to our special night...
+    </div>
+
+    <!-- Image Carousel -->
+    <div class="carousel">
+      <img id="carouselImg" src="your-photo1.jpg" alt="Photo together" />
+    </div>
+
+    <p>
+      I can't wait to spend this magical evening with you, baby. I love you so much!  
+    </p>
+
+    <button id="firstClick">Will you be my date, Miss Ely?</button>
+    <button id="secondClick">Are you sure you can handle my charm bbgirl? 😎</button>
+
+    <div id="finalMessage">Yay! You just earned an A+ in Love 💘 hahaha malandi! See you tomorrow!</div>
+  </div>
+
+  <!-- Map Embed -->
+  <div class="map-container">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.877660189648!2d121.02237871524656!3d14.555698889816856!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397c9b892ab18e7%3A0x8f95c77566cc3905!2sEncima%20Roofdeck!5e0!3m2!1sen!2sph!4v1694640000000!5m2!1sen!2sph"
+      width="100%"
+      height="100%"
+      style="border:0;"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+    ></iframe>
+  </div>
+
+  <!-- Floating Hearts -->
+  <script>
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = 5 + Math.random() * 5 + 's';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 10000);
+    }
+    setInterval(createHeart, 500);
+  </script>
+
+  <!-- Countdown Script -->
+  <script>
+    const countdownElement = document.getElementById("countdown");
+    const targetDate = new Date("September 14, 2025 18:00:00").getTime();
+
+    setInterval(() => {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance < 0) {
+        countdownElement.innerHTML = "🎉 It's time! Happy Anniversary!";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      countdownElement.innerHTML = `⏳ ${days}d ${hours}h ${minutes}m ${seconds}s left until our date ❤️`;
+    }, 1000);
+  </script>
+
+  <!-- Carousel Script -->
+  <script>
+    const images = [
+      "your-photo1.jpg",
+      "your-photo2.jpg",
+      "your-photo3.jpg"
+    ];
+
+    let currentImg = 0;
+    const imgElement = document.getElementById("carouselImg");
+
+    setInterval(() => {
+      currentImg = (currentImg + 1) % images.length;
+      imgElement.src = images[currentImg];
+    }, 4000);
+  </script>
+
+  <!-- Button Click Interaction -->
+  <script>
+    const firstClickBtn = document.getElementById("firstClick");
+    const secondClickBtn = document.getElementById("secondClick");
+    const finalMessage = document.getElementById("finalMessage");
+
+    firstClickBtn.addEventListener("click", () => {
+      firstClickBtn.style.display = "none";
+      secondClickBtn.style.display = "inline-block";
+    });
+
+    secondClickBtn.addEventListener("click", () => {
+      secondClickBtn.style.display = "none";
+      finalMessage.style.display = "block";
+    });
+  </script>
+
+</body>
+</html>
